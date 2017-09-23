@@ -40,7 +40,12 @@ I've set up a couple of goals for myself with this project.
 - Minimizing redundant code reduces overall LOC
 - Fewer LOC reduces the problem space when debugging
 - Fewer LOC requires fewer tests to gain coverage
-### Web Best Practices
+### One Export Per File
+- Keeps the purpose of files clear
+- Makes sharing globals between Classes/Modules/etc. difficult
+  - This difficulty can highlight the need to extract/abstract shared
+  values/behaviour. 
+### Misc Practices
 Making note of other best practices as I run across them
 - Minimize your JS and CSS
   - Could be doing a better job of this using Closure Compiler
@@ -48,6 +53,8 @@ Making note of other best practices as I run across them
 - Store strings in constants:
   - Allows for changing string values in a centralized place
   - Better supports automatic refactoring tools
+  - Make an exception for one-time use values (such as module names) to avoid
+  cluttering up the code with variables.
 
 Action Items and Takeaways
 ----

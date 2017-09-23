@@ -43,8 +43,8 @@ gulp.task('css', () => {
 });
 
 gulp.task('watch', ['css', 'js'], () => {
-    gulp.watch('./static-src/scss/**/*.scss', ['css']).on('error', handleError);
-gulp.watch('./static-src/js/**/*.js', ['js']).on('error', handleError);
+    gulp.watch('./src/scss/**/*.scss', ['css']).on('error', handleError);
+    gulp.watch('./src/js/**/*.js', ['js']).on('error', handleError);
 });
 
 gulp.task('default', ['watch']);
