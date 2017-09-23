@@ -23,6 +23,30 @@ Tech Used
 Debugging
 ----
 ### Problem with MultiValueMap recursion
+Commit Hash: fd564a863641d5b9e4ac4d3339b87e74b902c778
+The has function for the MultiValueMap is recursing infinitely. Will be logging
+actions taken here as a list in the order approached.
+- Starting with initial approach to see if the has will return if given no
+params.
+- It did not return with the empty set and was not being called where expected.
+- Examining the stack trace it appears the error is coming from the get property
+in DynamicDefaultMultiValueMap which is being called from the MultiValueMap has
+which in turn is calling the DynamicDefaultMultiValueMap get and continuing in
+this way infinitely.
+- Original code was not super readable and had redundancies, re-wrote and
+re-structured to use a separate function to get the inner map nested at the
+keys given.
+- New central inner map function returns the final instance now necessitating
+privately labelled (not actually private) methods for calling the super versions
+of has/set/get.
+- Adding console.log to ensure getInnerMap function terminates.
+- So it looks like the getInnerMap relies on the super get, which sets, which
+calls the MultiValueMap set which relies on the getInnerMap.
+- Found a solution by setting the default case in MultiValueMap set to be the
+single key, single value set of params.
+- Lesson learned was that using substitute supers on instances rather than
+maintaining the this context confused which function was called. Will re-write
+accordingly.
 
 Testing
 ----

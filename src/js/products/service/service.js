@@ -1,3 +1,4 @@
+import MultiValueMap from '../../handies/structs/maps/multi_value_map';
 import DynamicDefaultMultiValueMap from '../../handies/structs/maps/dynamic_default_multi_value_map';
 import SimpleAjax from '../../../../node_modules/simple-ajax/index';
 import constants from '../../constants';
@@ -56,7 +57,9 @@ class Service {
      * @param {?string} sort The field to sort on, or null to avoid sorting.
      */
     static getProducts({limit = null, skip = null, sort = null} = {}) {
-        return cache.get(limit, skip, sort);
+        console.log(new MultiValueMap().get(1,2,3));
+        return [1,2,3];
+        // return cache.get(limit, skip, sort);
     }
 }
 
