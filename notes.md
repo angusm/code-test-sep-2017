@@ -1,6 +1,12 @@
 Notes
 ====
 
+Known Bugs
+----
+- Different random parameters sent to the server for advertisements will return
+the same kitten picture. Looking at the code it seems to use modulo 16, so
+I will adjust the front-end to accommodate as an interim fix. 
+
 Shortcuts Taken
 ----
 - Brought in gulpfile and packages from previous hobby projects and code tests
@@ -56,6 +62,22 @@ likely that I'm using it incorrectly or a transpile error.
 `const [value] = remainder.slice(-1);`
 - One final bug was in DynamicDefaultMultiValueMap where I had re-used a private
 variable name.
+
+### Problem with duplicated ads
+I'd thought I'd addressed the duplicated ads by checking for matching generated
+values using the random seed provided in the initial markup. But I was noticing
+duplicated cats when testing.
+- I opened up the inspector to check the values in the src attribute of the
+images.
+- Seeing that they were different I opened them in a new tab to see what was
+happening and it seemed they were re-directing somewhere else.
+- I left the issue for a while to focus on other features.
+- I re-visited the issue once I was close to feature complete (I still need
+the "You've reached the end" notification) and took a look at the backend code.
+- Since the backend was taking the given value and running it through modulo 16
+and I was supposed to be using the same markup to generate my values as what was
+provided, I adjusted the comparison against the previous value to take this into
+consideration.
 
 Testing
 ----
