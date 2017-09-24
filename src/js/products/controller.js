@@ -22,6 +22,7 @@ class Controller {
         this.ngScope_ = $scope;
         this.bufferRequest_ = null;
         this.requestBeingProcessed_ = null;
+        this.progressIndicatorIsVisible_ = false;
     }
 
     $onInit() {
@@ -91,7 +92,12 @@ class Controller {
     }
 
     isProgressIndicatorVisible_() {
+        return this.progressIndicatorIsVisible_;
+    }
 
+    /** @export */
+    setProgressIndicatorVisibility(visibility) {
+        this.progressIndicatorIsVisible_ = visibility;
     }
 }
 

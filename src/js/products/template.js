@@ -10,7 +10,8 @@ const template = `
         </product-inline-advertisement>
     </div>
 </div>
-<progress-indicator></progress-indicator>
+<progress-indicator on-visibility-change="$ctrl.setProgressIndicatorVisibility.bind($ctrl)">
+</progress-indicator>
 `;
 
 export default template;

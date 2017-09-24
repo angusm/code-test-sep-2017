@@ -10,6 +10,7 @@ Shortcuts Taken
   - https://github.com/angusm/chaffers/tree/master/resources/static/javascript/src/handies
   - Exceptions:
     - Created and added MultiValueMap and DynamicDefaultMultiValueMap
+    - Created and added files in `dom` folder.
   
 Tech Used
 ----
@@ -129,6 +130,11 @@ I've set up a couple of goals for myself with this project.
 - Reduces noise in diffs relating to stylistic changes between shifting dev
 preferences.
 - Roughly following: https://google.github.io/styleguide/jsguide.html
+### Abstract Smells
+There's not always going to be time to research in the best way to do something
+and often I'll need to settle for something I know will work in the interim. In
+these cases I try to abstract away pieces I'm less confident in to a separate
+function so it can be more easily refactored or re-written later.
 ### Misc Practices
 Making note of other best practices as I run across them
 - Leverage FastDOM for effects and interactions
