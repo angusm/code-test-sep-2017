@@ -2,7 +2,12 @@ import AdvertisementService from './service';
 
 class Controller {
     constructor() {
-        this.advertisement = AdvertisementService.getAdvertisement();
+        this.advertisement = null;
+    }
+
+    $onInit() {
+        this.advertisement =
+            this.advertisement || AdvertisementService.getAdvertisement();
     }
 
     getAdvertisement() {

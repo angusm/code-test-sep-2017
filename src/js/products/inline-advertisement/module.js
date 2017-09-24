@@ -6,6 +6,9 @@ const module = angular.module('productInlineAdvertisement', []);
 module.component('productInlineAdvertisement', {
     template: template,
     controller: Controller,
+    bindings: {
+        advertisement: '<',
+    },
 });
 
 export default module;

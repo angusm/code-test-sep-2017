@@ -6,6 +6,7 @@ const template = `
             product="product">
         </product>
         <product-inline-advertisement
+            advertisement="productGroup.getAdvertisement()"
             ng-if="productGroup.getAllProducts().length >= 20">
         </product-inline-advertisement>
     </div>
