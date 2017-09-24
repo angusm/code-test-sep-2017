@@ -35,6 +35,17 @@ gulp.task('js', () => {
         .pipe(gulp.dest('./static/js/'));
 });
 
+gulp.task('js-joda', () => {
+    return  gulp.src('./node_modules/js-joda/dist/js-joda.js')
+        .pipe(gulp.dest('./static/js/'));
+});
+
+gulp.task('js-joda-locale', () => {
+    return  gulp.src('./node_modules/js-joda/dist/js-joda.js')
+        .pipe(gulp.dest('./static/js/'));
+});
+
+
 gulp.task('css', () => {
     return gulp.src('./src/scss/main.scss')
         .pipe(sass()) // Converts Sass to CSS with gulp-sass

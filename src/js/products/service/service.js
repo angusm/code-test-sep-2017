@@ -1,5 +1,5 @@
-import MultiValueMap from '../../handies/structs/maps/multi_value_map';
 import DynamicDefaultMultiValueMap from '../../handies/structs/maps/dynamic_default_multi_value_map';
+import Product from './product';
 import SimpleAjax from '../../../../node_modules/simple-ajax/index';
 import constants from '../../constants';
 
@@ -11,6 +11,12 @@ const ParamKeys = Object.freeze({
 });
 const API_ENDPOINT = '/api/products';
 
+function parseJSONResponse(response) {
+    const responseLines = response.split('\n');
+    const validResponseLines = responseLines.filter((line) => !!line);
+    return validResponseLines.map((responseLine) => JSON.parse(responseLine));
+}
+
 function getProductsForCache(limit = null, skip = null, sort = null) {
     return new Promise((resolve, reject) => {
         const request = new SimpleAjax({
@@ -18,14 +24,11 @@ function getProductsForCache(limit = null, skip = null, sort = null) {
             method: 'GET',
         });
         request.on(constants.SimpleAjax.Event.SUCCESS, (event) => {
-            const rawResponse = event.target.response;
-            const responseLines = rawResponse.split('\n');
-            const validResponseLines = responseLines.filter((line) => !!line);
-            const parsedResponseLines =
-                validResponseLines.map((responseLine) => {
-                    return JSON.parse(responseLine);
-                });
-            resolve(parsedResponseLines);
+            const parsedResponse = parseJSONResponse(event.target.response);
+            console.log(parsedResponse);
+            const instances = parsedResponse.map((data) => new Product(data));
+            console.log(instances);
+            resolve(instances);
         });
         request.on(constants.SimpleAjax.Event.ERROR, (event) => {
             reject(event);
