@@ -72,6 +72,10 @@ class Product {
         return (this.getPriceInCents() / 100).toFixed(2);
     }
 
+    getDisplayPrice() {
+        return `$${this.getPriceInDollars()}`;
+    }
+
     getSizeInPx() {
         return `${this.size_}px`;
     }

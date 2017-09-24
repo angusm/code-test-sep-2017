@@ -9,7 +9,7 @@ const template = `
     </div>
     <div class="product__price">
         <span class="product__label">Price:</span>
-        <span ng-bind="$ctrl.getProduct().getPriceInDollars()"></span>
+        <span ng-bind="$ctrl.getProduct().getDisplayPrice()"></span>
     </div>
     <div class="product__date">
         <span class="product__label">Date:</span>
