@@ -10,7 +10,7 @@ const template = `
         </product-inline-advertisement>
     </div>
 </div>
-<div class="products-page-progress-indicator"></div>
+<progress-indicator></progress-indicator>
 `;
 
 export default template;

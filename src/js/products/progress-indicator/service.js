@@ -1,4 +1,4 @@
-const singleton = new LoadingService();
+let singleton;
 
 class LoadingService {
     constructor() {
@@ -18,6 +18,7 @@ class LoadingService {
     }
 
     static getInstance() {
+        singleton = singleton || new LoadingService();
         return singleton;
     }
 }

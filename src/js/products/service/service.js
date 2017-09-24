@@ -25,9 +25,7 @@ function getProductsForCache(limit = null, skip = null, sort = null) {
         });
         request.on(constants.SimpleAjax.Event.SUCCESS, (event) => {
             const parsedResponse = parseJSONResponse(event.target.response);
-            console.log(parsedResponse);
             const instances = parsedResponse.map((data) => new Product(data));
-            console.log(instances);
             resolve(instances);
         });
         request.on(constants.SimpleAjax.Event.ERROR, (event) => {
