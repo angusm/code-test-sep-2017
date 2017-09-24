@@ -1,4 +1,9 @@
 const template = `
+<label for="products-sort-value">Sort by: </label>
+<select name="products-sort-value" 
+    ng-options="option for option in $ctrl.getSortOptions()"
+    ng-model="$ctrl.sortOption"
+    ng-change="$ctrl.updateSortOption()"></select>
 <div class="products">
     <div class="product-group"
         ng-repeat="productGroup in $ctrl.getProductGroups()">

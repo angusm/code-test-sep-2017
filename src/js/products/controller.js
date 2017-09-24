@@ -4,7 +4,18 @@ import LoadingService from './progress-indicator/service';
 import ProductGroup from './product-group';
 import ProductsService from './service/service';
 
+const SortOption = Object.freeze({
+    ID: 'ID',
+    PRICE: 'Price',
+    SIZE: 'Size',
+});
 const PRODUCTS_PER_REQUEST = 10;
+const SORT_OPTIONS = Object.freeze(Object.values(SortOption));
+const sortFieldsBySortOption = new Map([
+    [SortOption.ID, 'id'],
+    [SortOption.PRICE, 'price'],
+    [SortOption.SIZE, 'size'],
+]);
 
 class Controller {
     /** @ngInject */
@@ -15,6 +26,7 @@ class Controller {
         this.advertisements_ =
             new DynamicDefaultMap(
                 () => AdvertisementService.getAdvertisement());
+        this.sortOption = null;
     }
 
     $onInit() {
@@ -38,10 +50,15 @@ class Controller {
         LoadingService.getInstance().startLoad();
         const limit = PRODUCTS_PER_REQUEST;
         const skip = this.getSkipValueForNextRequest_();
-        const request = ProductsService.getProducts({limit, skip});
+        const sort = this.getSortValue_();
+        const request = ProductsService.getProducts({limit, skip, sort});
         request.then(() => LoadingService.getInstance().endLoad());
 
         this.requests_.set(skip, request);
+    }
+
+    getSortValue_() {
+        return sortFieldsBySortOption.get(this.sortOption) || null;
     }
 
     getSortedRequests_() {
@@ -90,6 +107,7 @@ class Controller {
                 this.productGroups_ = productGroups;
                 this.requestMoreProducts_();
                 this.ngScope_.$digest();
+                console.log('DIGEST');
             });
     }
 
@@ -98,6 +116,19 @@ class Controller {
         if (!!visibility) {
             this.updateProductGroups_();
         }
+    }
+
+    /** @export */
+    getSortOptions() {
+        return SORT_OPTIONS;
+    }
+
+    /** @export */
+    updateSortOption() {
+        console.log('Sort option changed');
+        this.productGroups_ = [];
+        this.requests_ = new Map();
+        this.updateProductGroups_();
     }
 }
 
