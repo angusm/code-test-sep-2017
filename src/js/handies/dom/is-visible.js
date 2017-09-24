@@ -1,5 +1,4 @@
 import getOffsetTopFromViewport from './get-offset-top-from-viewport';
-import getOffsetParentRoot from './get-offset-parent-root';
 import isInRange from '../functions/is-in-range';
 
 function isVisible(el) {

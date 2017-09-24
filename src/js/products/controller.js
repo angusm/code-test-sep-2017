@@ -1,18 +1,8 @@
 import LoadingService from './progress-indicator/service';
+import ProductGroup from './product-group';
 import ProductsService from './service/service';
-import fastdom from '../../../node_modules/fastdom/fastdom';
 
 const PRODUCTS_PER_REQUEST = 10;
-
-class ProductGroup {
-    constructor(products) {
-        this.products_ = products;
-    }
-
-    getAllProducts() {
-        return this.products_;
-    }
-}
 
 class Controller {
     /** @ngInject */
@@ -22,12 +12,10 @@ class Controller {
         this.ngScope_ = $scope;
         this.bufferRequest_ = null;
         this.requestBeingProcessed_ = null;
-        this.progressIndicatorIsVisible_ = false;
     }
 
     $onInit() {
         this.bufferRequest_ = this.requestMoreProducts_();
-        this.prepPreRender_();
     }
 
     requestMoreProducts_() {
@@ -79,25 +67,11 @@ class Controller {
         return this.productGroups_;
     }
 
-    prepPreRender_() {
-        fastdom.measure(() => this.preRender_());
-    }
-
-    preRender_() {
-        if (this.isProgressIndicatorVisible_()) {
-            this.processNextRequest_();
-        }
-
-        fastdom.mutate(() => this.prepPreRender_());
-    }
-
-    isProgressIndicatorVisible_() {
-        return this.progressIndicatorIsVisible_;
-    }
-
     /** @export */
     setProgressIndicatorVisibility(visibility) {
-        this.progressIndicatorIsVisible_ = visibility;
+        if (visibility) {
+            this.processNextRequest_();
+        }
     }
 }
 

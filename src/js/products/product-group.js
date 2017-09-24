@@ -1,11 +1,10 @@
-class ProductPage {
+class ProductGroup {
     constructor(products) {
         this.products_ = products;
     }
 
-    getProducts() {
+    getAllProducts() {
         return this.products_;
     }
 }
-
-export default ProductPage;
+export default ProductGroup;
