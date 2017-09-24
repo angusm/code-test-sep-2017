@@ -113,7 +113,6 @@ class Controller {
                 this.productGroups_ = productGroups;
                 this.requestMoreProducts_();
                 this.ngScope_.$digest();
-                console.log('DIGEST');
             });
     }
 
@@ -131,7 +130,6 @@ class Controller {
 
     /** @export */
     updateSortOption() {
-        console.log('Sort option changed');
         this.productGroups_ = [];
         this.requests_ = new Map();
         this.updateProductGroups_();
