@@ -47,6 +47,14 @@ single key, single value set of params.
 - Lesson learned was that using substitute supers on instances rather than
 maintaining the this context confused which function was called. Will re-write
 accordingly.
+- Had to add special handling in set for inner maps and a property to designate
+inner maps. It would seem that `instanceof` is failing me now though. Most
+likely that I'm using it incorrectly or a transpile error.
+- And the final bug was silly, as it always is. Had 
+`const value = remainder.slice(-1);` where I needed
+`const [value] = remainder.slice(-1);`
+- One final bug was in DynamicDefaultMultiValueMap where I had re-used a private
+variable name.
 
 Testing
 ----

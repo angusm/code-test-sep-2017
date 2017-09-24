@@ -3,15 +3,17 @@ import MultiValueMap from './multi_value_map';
 export default class DynamicDefaultMultiValueMap extends MultiValueMap {
     constructor(defaultGenerator) {
         super();
-        this.defaultGenerator_ = defaultGenerator;
+        this.dynamicDefaultMultiValueMapGenerator_ = defaultGenerator;
     }
 
     get() {
-        if (super.has(...arguments)) {
-            return super.get(...arguments);
+        const args = [...arguments];
+        if (super.has(...args)) {
+            return super.get(...args);
         } else {
-            const generatedDefault = this.defaultGenerator_(...arguments);
-            this.set(...arguments, generatedDefault);
+            const generatedDefault =
+                this.dynamicDefaultMultiValueMapGenerator_(...args);
+            this.set(...args, generatedDefault);
             return generatedDefault;
         }
     }

@@ -18,13 +18,14 @@ function getProductsForCache(limit = null, skip = null, sort = null) {
             method: 'GET',
         });
         request.on(constants.SimpleAjax.Event.SUCCESS, (event) => {
-            console.log(event);
-            resolve(event);
+            const rawResponse = event.target.response;
+            const responseLines = rawResponse.split('\n');
+            resolve(responseLines);
         });
         request.on(constants.SimpleAjax.Event.ERROR, (event) => {
-            console.log(event);
             reject(event);
         });
+        request.send();
     });
 }
 
@@ -57,9 +58,7 @@ class Service {
      * @param {?string} sort The field to sort on, or null to avoid sorting.
      */
     static getProducts({limit = null, skip = null, sort = null} = {}) {
-        console.log(new MultiValueMap().get(1,2,3));
-        return [1,2,3];
-        // return cache.get(limit, skip, sort);
+        return cache.get(limit, skip, sort);
     }
 }
 

@@ -4,67 +4,54 @@ import MapWrapper from './map_wrapper';
 const VALUE_KEY = Symbol('Key for values in MultiValueMap');
 
 export default class MultiValueMap extends DynamicDefaultMap {
-    constructor() {
-        super(() => new MultiValueMap());
+    constructor(innerMap=false) {
+        super(() => new MultiValueMap(true));
+        this.isInnerMap_ = innerMap;
     }
 
     get() {
-        console.log('Raw get call', arguments);
-        if (this.has(...arguments)) {
-            return this.getInnerMap_(...arguments).getValueForMap_();
-        } else {
-            return undefined;
-        }
-    }
-
-    /**
-     * Return the inner map, up until the point where the VALUE_KEY should be
-     * used to return the value at that level of values.
-     * @private
-     */
-    getInnerMap_() {
-        console.log({'args':arguments});
+        const [nextKey, ...remainder] = [...arguments];
         if (!arguments.length) {
-            console.log('Got to inner most map');
-            return this;
+            if (super.has(VALUE_KEY)) {
+                return super.get(VALUE_KEY);
+            } else {
+                return undefined;
+            }
         } else {
-            const [key, ...remainder] = arguments;
-            console.log({key, remainder, 'a':this});
-            const nextMap = super.get(key);
-            console.log('Next map', nextMap);
-            return super.get(key).getInnerMap_(...remainder);
+            return super.get(nextKey).get(...remainder);
         }
-    }
-
-    setValueForMap_(value) {
-        return super.set(VALUE_KEY, value);
-    }
-
-    hasForMap_() {
-        return super.has(VALUE_KEY);
-    }
-
-    getValueForMap_() {
-        return super.get(VALUE_KEY);
     }
 
     set() {
-        // Short circuit if there is only one key and the key is VALUE_KEY
-        const args = [...arguments];
-        const [value] = [...arguments].slice(-1);
-        const keys = args.slice(0, -1);
-        if (args.length === 2) {
-            const key = keys[0];
-            if (!super.has(key)) {
-                super.set(key, new MultiValueMap());
+        const [nextKey, ...remainder] = [...arguments];
+        const [value] = remainder.slice(-1);
+        // Recursion will not move past arguments of length 2, so a call of
+        // length 1 is a deliberate assignment to undefined.
+        if (arguments.length === 1) {
+            return super.get(nextKey).set(VALUE_KEY, undefined);
+
+        // Default case for any key(s)-value assignments
+        } else if (arguments.length === 2) {
+            const isInnerMap =
+                value instanceof MultiValueMap && value.isInnerMap_;
+            const isSpecialKey = nextKey === VALUE_KEY;
+
+            if (isInnerMap || isSpecialKey) {
+                return super.set(nextKey, value);
+            } else {
+                return super.get(nextKey).set(VALUE_KEY, value);
             }
-            super.get(key).setValueForMap_(value);
         } else {
-            return this.getInnerMap_(...keys).setValueForMap_(value);
+            return super.get(nextKey).set(...remainder);
         }
     }
 
     has() {
-        return this.getInnerMap_(...arguments).hasForMap_();
+        const [nextKey, ...remainder] = [...arguments];
+        if (!arguments.length || (!remainder.length && nextKey === VALUE_KEY)) {
+            return super.has(VALUE_KEY);
+        } else {
+            return super.get(nextKey).has(...remainder);
+        }
     }
 }
