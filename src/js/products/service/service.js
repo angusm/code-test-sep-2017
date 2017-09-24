@@ -20,7 +20,12 @@ function getProductsForCache(limit = null, skip = null, sort = null) {
         request.on(constants.SimpleAjax.Event.SUCCESS, (event) => {
             const rawResponse = event.target.response;
             const responseLines = rawResponse.split('\n');
-            resolve(responseLines);
+            const validResponseLines = responseLines.filter((line) => !!line);
+            const parsedResponseLines =
+                validResponseLines.map((responseLine) => {
+                    return JSON.parse(responseLine);
+                });
+            resolve(parsedResponseLines);
         });
         request.on(constants.SimpleAjax.Event.ERROR, (event) => {
             reject(event);
@@ -28,7 +33,6 @@ function getProductsForCache(limit = null, skip = null, sort = null) {
         request.send();
     });
 }
-
 
 function getFullQueryURL(limit = null, skip = null, sort = null) {
     const queryParams = getQueryParams(limit, skip, sort);
