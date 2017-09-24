@@ -3,13 +3,14 @@ import DynamicDefaultMap from '../handies/structs/maps/dynamic_default';
 import LoadingService from './progress-indicator/service';
 import ProductGroup from './product-group';
 import ProductsService from './service/service';
+import isDef from '../handies/functions/is_def';
 
 const SortOption = Object.freeze({
     ID: 'ID',
     PRICE: 'Price',
     SIZE: 'Size',
 });
-const PRODUCTS_PER_REQUEST = 10;
+const PRODUCTS_PER_REQUEST = 20;
 const SORT_OPTIONS = Object.freeze(Object.values(SortOption));
 const sortFieldsBySortOption = new Map([
     [SortOption.ID, 'id'],
@@ -26,7 +27,7 @@ class Controller {
         this.advertisements_ =
             new DynamicDefaultMap(
                 () => AdvertisementService.getAdvertisement());
-        this.sortOption = null;
+        this.sortOption = SortOption.ID;
     }
 
     $onInit() {
@@ -39,11 +40,16 @@ class Controller {
     }
 
     getCurrentSkipValue_() {
-        return this.getSortedRequestKeys_().reverse()[0] || 0;
+        return this.getSortedRequestKeys_().reverse()[0];
     }
 
     getSkipValueForNextRequest_() {
-        return this.getCurrentSkipValue_() + PRODUCTS_PER_REQUEST;
+        const currentSkipValue = this.getCurrentSkipValue_();
+        if (isDef(currentSkipValue)) {
+            return currentSkipValue + PRODUCTS_PER_REQUEST;
+        } else {
+            return 0;
+        }
     }
 
     requestMoreProducts_() {

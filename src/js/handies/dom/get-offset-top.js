@@ -1,5 +1,9 @@
 function getOffsetTop(el) {
-    return !!el ? el.offsetTop + getOffsetTop(el.offsetParent) : 0;
+    if (!!el) {
+        return el.offsetTop + getOffsetTop(el.offsetParent);
+    } else {
+        return 0;
+    }
 }
 
 export default getOffsetTop;
