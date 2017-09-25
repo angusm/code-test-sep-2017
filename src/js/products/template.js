@@ -16,8 +16,13 @@ const template = `
         </product-inline-advertisement>
     </div>
 </div>
-<progress-indicator on-visibility-change="$ctrl.setProgressIndicatorVisibility.bind($ctrl)">
+<progress-indicator
+    ng-if="!$ctrl.hasLoadedLastValue()"
+    on-visibility-change="$ctrl.setProgressIndicatorVisibility.bind($ctrl)">
 </progress-indicator>
+<div class="products-end-of-catalogue" ng-if="$ctrl.hasLoadedLastValue()">
+    ~ end of catalogue ~
+</div>
 `;
 
 export default template;

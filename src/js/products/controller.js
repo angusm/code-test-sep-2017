@@ -28,6 +28,7 @@ class Controller {
             new DynamicDefaultMap(
                 () => AdvertisementService.getAdvertisement());
         this.sortOption = SortOption.ID;
+        this.hasLoadedLastValue_ = false;
     }
 
     $onInit() {
@@ -53,14 +54,32 @@ class Controller {
     }
 
     requestMoreProducts_() {
+        if (this.hasLoadedLastValue()) {
+            return;
+        }
         LoadingService.getInstance().startLoad();
         const limit = PRODUCTS_PER_REQUEST;
         const skip = this.getSkipValueForNextRequest_();
         const sort = this.getSortValue_();
         const request = ProductsService.getProducts({limit, skip, sort});
         request.then(() => LoadingService.getInstance().endLoad());
+        request.then((products) => this.checkForFinalRequest_(products));
 
         this.requests_.set(skip, request);
+    }
+
+    checkForFinalRequest_(products) {
+        if (products.length < PRODUCTS_PER_REQUEST) {
+            Promise.all(this.getSortedRequests_())
+                .then(() => {
+                    this.hasLoadedLastValue_ = true;
+                });
+        }
+    }
+
+    /** @export */
+    hasLoadedLastValue() {
+        return this.hasLoadedLastValue_;
     }
 
     getSortValue_() {
