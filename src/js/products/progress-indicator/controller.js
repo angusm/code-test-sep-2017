@@ -1,7 +1,10 @@
 import LoadingService from './service';
 
 class Controller {
-    /** @export */
+    /**
+     * @returns {boolean} Whether there is currently loading going on.
+     * @export
+     */
     isLoading() {
         return LoadingService.getInstance().isLoading();
     }
