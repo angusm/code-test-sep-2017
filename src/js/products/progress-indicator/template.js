@@ -1,6 +1,7 @@
 const template = `
-<div class="progress-indicator">
-    <div ng-if="$ctrl.isLoading()">Loading...</div>
+<div class="progress-indicator" ng-if="$ctrl.isLoading()">
+    <div class="progress-indicator__spinner"></div>
+    <div>Loading...</div>
 </div>
 `;
 

@@ -37,3 +37,51 @@ product {
 
 .product__id {
   font-size: 12px; }
+
+.progress-indicator {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%; }
+  .progress-indicator div {
+    margin: 10px; }
+
+@keyframes progress-indicator__spinner--animation {
+  0% {
+    transform: rotate(0deg); }
+  100%,
+  0% {
+    border-bottom: 25px solid rgba(0, 0, 0, 0.175);
+    border-left: 25px solid rgba(0, 0, 0, 0.25);
+    border-right: 25px solid rgba(0, 0, 0, 0.075);
+    border-top: 25px solid transparent; }
+  25% {
+    border-bottom: 25px solid rgba(0, 0, 0, 0.075);
+    border-left: 25px solid rgba(0, 0, 0, 0.175);
+    border-right: 25px solid transparent;
+    border-top: 25px solid rgba(0, 0, 0, 0.25);
+    transform: rotate(90deg); }
+  50% {
+    border-bottom: 25px solid transparent;
+    border-left: 25px solid rgba(0, 0, 0, 0.075);
+    border-right: 25px solid rgba(0, 0, 0, 0.25);
+    border-top: 25px solid rgba(0, 0, 0, 0.175);
+    transform: rotate(180deg); }
+  75% {
+    border-bottom: 25px solid rgba(0, 0, 0, 0.25);
+    border-left: 25px solid transparent;
+    border-right: 25px solid rgba(0, 0, 0, 0.175);
+    border-top: 25px solid rgba(0, 0, 0, 0.075);
+    transform: rotate(270deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.progress-indicator__spinner {
+  animation-name: progress-indicator__spinner--animation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border-radius: 25px;
+  height: 0;
+  width: 0; }

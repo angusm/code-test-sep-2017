@@ -48,3 +48,69 @@ product {
 .product__id {
   font-size: 12px;
 }
+
+.progress-indicator {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  div {
+    margin: 10px;
+  }
+}
+
+$progress-indicator-size: 25px;
+
+@keyframes progress-indicator__spinner--animation {
+  $solid-border: $progress-indicator-size solid rgba(0, 0, 0, .25);
+  $dark-transparent-border: $progress-indicator-size solid rgba(0, 0, 0, .175);
+  $light-transparent-border: $progress-indicator-size solid rgba(0, 0, 0, .075);
+  $transparent-border: $progress-indicator-size solid rgba(0, 0, 0, 0);
+
+  0% {
+    transform: rotate(0deg);
+  }
+  100%,
+  0% {
+    border-bottom: $dark-transparent-border;
+    border-left: $solid-border;
+    border-right: $light-transparent-border;
+    border-top: $transparent-border;
+  }
+  25% {
+    border-bottom: $light-transparent-border;
+    border-left: $dark-transparent-border;
+    border-right: $transparent-border;
+    border-top: $solid-border;
+    transform: rotate(90deg);
+  }
+  50% {
+    border-bottom: $transparent-border;
+    border-left: $light-transparent-border;
+    border-right: $solid-border;
+    border-top: $dark-transparent-border;
+    transform: rotate(180deg);
+  }
+  75% {
+    border-bottom: $solid-border;
+    border-left: $transparent-border;
+    border-right: $dark-transparent-border;
+    border-top: $light-transparent-border;
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.progress-indicator__spinner {
+  animation-name: progress-indicator__spinner--animation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border-radius: $progress-indicator-size;
+  height: 0;
+  width: 0;
+}
