@@ -1,6 +1,7 @@
 import Controller from './controller';
 import template from './template';
 
+/** @type {!angular.module} */
 const module = angular.module('productInlineAdvertisement', []);
 
 module.component('productInlineAdvertisement', {

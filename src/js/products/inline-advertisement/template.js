@@ -1,5 +1,4 @@
-const template = `
-<img class="ad" ng-src="{{$ctrl.getAdvertisement()}}" />
-`;
+/** @type {string} */
+const template = '<img class="ad" ng-src="{{$ctrl.getAdvertisement()}}" />';
 
 export default template;
