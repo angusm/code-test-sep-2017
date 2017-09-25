@@ -1,4 +1,4 @@
-import AdvertisementService from './inline-advertisement/service';
+import AdvertisementService from './advertisement/service';
 import DynamicDefaultMap from '../handies/structs/maps/dynamic_default';
 import LoadingService from './progress-indicator/service';
 import ProductGroup from './product-group';

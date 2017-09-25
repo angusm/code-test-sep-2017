@@ -1,12 +1,12 @@
 import Controller from './controller';
-import inlineAdvertisementModule from './inline-advertisement/module';
+import advertisementModule from './advertisement/module';
 import onVisibilityChangeModule from '../components/on-visibility-change/module';
 import productModule from './product/module';
 import progressIndicatorModule from './progress-indicator/module';
 import template from './template';
 
 const module = angular.module('discountAsciiWarehouseProducts', [
-    inlineAdvertisementModule.name,
+    advertisementModule.name,
     onVisibilityChangeModule.name,
     productModule.name,
     progressIndicatorModule.name,
