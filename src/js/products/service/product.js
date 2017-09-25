@@ -1,14 +1,20 @@
+/**
+ * @fileoverview Defines a class for storing product information.
+ */
+
 import constants from '../../constants';
 import moment from 'moment-timezone';
 
 class Product {
-    constructor({
-        id = null,
-        size = null,
-        price = null,
-        face = null,
-        date = null,
-    } = {}) {
+    /**
+     * @param {number} id ID of the emoji.
+     * @param {number} size Font-size for the emoji in pixels.
+     * @param {number} price Price of the emoji in cents.
+     * @param {string} face Characters to make the emoji.
+     * @param {string} date String representation of the date the emoji was
+     *     added
+     */
+    constructor({id, size, price, face, date} = {}) {
        this.id_ = id;
        this.size_ = size;
        this.price_ = price;
@@ -16,6 +22,9 @@ class Product {
        this.date_ = date;
     }
 
+    /**
+     * @returns {string} The date formatted for display.
+     */
     getDisplayDate() {
         if (!this.date_) {
             return constants.UNKNOWN_VALUE;
@@ -52,34 +61,49 @@ class Product {
         }
     }
 
+    /**
+     * @returns {string} String of characters arranged to look like a cute face.
+     */
     getFace() {
         return this.face_;
     }
 
+    /**
+     * @returns {{font-size: string}} Object containing style information for an
+     *     ng-style attribute.
+     */
     getFaceStyle() {
         return {'font-size': this.getSizeInPx()};
     }
 
+    /**
+     * @returns {number} The ID of the product.
+     */
     getId() {
         return this.id_;
     }
 
+    /** @returns {number} The price of the emoji in cents. */
     getPriceInCents() {
         return this.price_;
     }
 
+    /** @returns {number} The price of the emoji in dollars. */
     getPriceInDollars() {
-        return (this.getPriceInCents() / 100).toFixed(2);
+        return this.getPriceInCents() / 100;
     }
 
+    /** @returns {string} The price of the emoji in dollars for display. */
     getDisplayPrice() {
-        return `$${this.getPriceInDollars()}`;
+        return `$${this.getPriceInDollars().toFixed(2)}`;
     }
 
+    /** @returns {number} The font-size of the emoji in pixels. */
     getSize() {
         return this.size_;
     }
 
+    /** @returns {string} The font-size in pixels for CSS. */
     getSizeInPx() {
         return `${this.getSize()}px`;
     }

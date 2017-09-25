@@ -13,7 +13,7 @@ const template = `
         <span ng-bind="$ctrl.getProduct().getDisplayPrice()"></span>
     </div>
     <div>
-        <span class="product__label">Date:</span>
+        <span class="product__label">Date Added:</span>
         <span ng-bind="$ctrl.getProduct().getDisplayDate()"></span>
     </div>
     <div class="product__id">
