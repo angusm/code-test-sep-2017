@@ -5,6 +5,10 @@
 import MultiValueMap from './multi_value_map';
 
 export default class DynamicDefaultMultiValueMap extends MultiValueMap {
+    /**
+     * @param {function(...*): *} defaultGenerator Generates default values for
+     *     keys.
+     */
     constructor(defaultGenerator) {
         super();
         this.dynamicDefaultMultiValueMapGenerator_ = defaultGenerator;

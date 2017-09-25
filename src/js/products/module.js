@@ -15,7 +15,7 @@ const module = angular.module('discountAsciiWarehouseProducts', [
 
 module.component('products', {
     template: template,
-    controller: Controller,
+    controller: ['$scope', Controller],
 });
 
 export default module;
