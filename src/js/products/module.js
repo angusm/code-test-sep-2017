@@ -5,6 +5,7 @@ import productModule from './product/module';
 import progressIndicatorModule from './progress-indicator/module';
 import template from './template';
 
+/** @type {!angular.module} */
 const module = angular.module('discountAsciiWarehouseProducts', [
     advertisementModule.name,
     onVisibilityChangeModule.name,

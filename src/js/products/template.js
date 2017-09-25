@@ -1,3 +1,4 @@
+/** @type {string} */
 const template = `
 <label for="products-sort-value">Sort by: </label>
 <select name="products-sort-value" 

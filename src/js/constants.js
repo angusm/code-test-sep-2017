@@ -1,4 +1,7 @@
-export default Object.freeze({
+/**
+ * @const {!Object} Name-spaced constants.
+ */
+const constants = Object.freeze({
     RequestMethod: {
         GET: 'GET',
     },
@@ -28,3 +31,5 @@ export default Object.freeze({
     },
     UNKNOWN_VALUE: 'N/A',
 });
+
+export default constants;

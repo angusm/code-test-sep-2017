@@ -4,19 +4,28 @@ import SimpleAjax from '../../../../node_modules/simple-ajax/index';
 import constants from '../../constants';
 
 /**
+ * Object in a product endpoint response.
  * @typedef {{
  *     id: number,
  *     size: number,
  *     price: number,
  *     face: string,
  *     date: string
- *   }} ProductResponseObject Object in a product endpoint response.
+ *   }} ProductResponseObject
  */
 
-/** @type {!DynamicDefaultMultiValueMap} Cache for request promises. */
+/**
+ * Promise resolving to products.
+ * @typedef {!Promise<!Array<!Product>>} ProductsPromise
+ */
+
+/**
+ * Cache for request promises.
+ * @type {!DynamicDefaultMultiValueMap<number, number, string, ProductsPromise>}
+ */
 const cache = new DynamicDefaultMultiValueMap(getProductsForCache);
 
-/** @types {Object<string, string>} Parameter key constants. */
+/** @type {Object<string, string>} Parameter key constants. */
 const ParamKeys = Object.freeze({
     LIMIT: 'limit',
     SKIP: 'skip',
@@ -42,8 +51,7 @@ function parseJSONResponse(response) {
  * @param {?number} limit Number of entries to retrieve.
  * @param {?number} skip Number of entries to skip.
  * @param {?string} sort Field to sort on.
- * @returns {Promise<!Array<!Product>>} Objects parsed from a product endpoints
- *     response.
+ * @returns {ProductsPromise} Objects parsed from a product endpoints response.
  */
 function getProductsForCache(limit = null, skip = null, sort = null) {
     return new Promise((resolve, reject) => {
@@ -100,8 +108,8 @@ class Service {
      * @param {?number} skip The number of entries to skip before returning the
      *     result set, or null to start from the beginning.
      * @param {?string} sort The field to sort on, or null to avoid sorting.
-     * @returns {Promise<!Array<!ProductResponseObject>>} Objects parsed from a
-     *     product endpoints response.
+     * @returns {ProductsPromise} Objects parsed from a product endpoints
+     *     response.
      */
     static getProducts({limit = null, skip = null, sort = null} = {}) {
         return cache.get(limit, skip, sort);
