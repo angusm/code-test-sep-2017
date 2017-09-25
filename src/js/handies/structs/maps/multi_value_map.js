@@ -1,14 +1,40 @@
-import DynamicDefaultMap from './dynamic_default';
-import MapWrapper from './map_wrapper';
+/**
+ * @fileoverview Establishes a class that can be used as a map to store values
+ * under an arbitrary number of keys.
+ *
+ * Ex.
+ *
+ * const foo = new MultiValueMap();
+ *
+ * foo.set(1, 2, 3, 4);
+ * foo.get(1, 2, 3); // Returns 4
+ */
 
+import DynamicDefaultMap from './dynamic_default';
+
+/** @type {Symbol} Key for storing actual values. */
 const VALUE_KEY = Symbol('Key for values in MultiValueMap');
 
-export default class MultiValueMap extends DynamicDefaultMap {
-    constructor(innerMap=false) {
+class MultiValueMap extends DynamicDefaultMap {
+    /**
+     * @param {boolean} innerMap Whether this map is only used to store internal
+     *     structures and should not be directly accessible to an end user.
+     */
+    constructor(innerMap = false) {
         super(() => new MultiValueMap(true));
+
+        /**
+         * @private {boolean} Whether this map is only used to store internal
+         *     structures and should not be directly accessible to an end user.
+         */
         this.isInnerMap_ = innerMap;
     }
 
+    /**
+     * Returns a value stored under the given keys.
+     * @param {...*} arguments Keys to use to retrieve a value.
+     * @returns {*} Value stored under the given keys.
+     */
     get() {
         const [nextKey, ...remainder] = [...arguments];
         if (!arguments.length) {
@@ -22,6 +48,16 @@ export default class MultiValueMap extends DynamicDefaultMap {
         }
     }
 
+    /**
+     * Stores a value under the given keys.
+     *
+     * WARNING: The return value of this function is not as intended and will
+     * be updated. Please do not build functionality around it.
+     *
+     * @param {...*} arguments Keys used to store a value, with the final value
+     *     in the arguments being the value to be stored.
+     * @returns {Map} The inner map storing the final value.
+     */
     set() {
         const [nextKey, ...remainder] = [...arguments];
         const [value] = remainder.slice(-1);
@@ -46,6 +82,12 @@ export default class MultiValueMap extends DynamicDefaultMap {
         }
     }
 
+    /**
+     * Returns whether there is a value stored under the given keys.
+     *
+     * @param {...*} arguments The keys in question.
+     * @returns {boolean} Whether there is a value stored under the given keys.
+     */
     has() {
         const [nextKey, ...remainder] = [...arguments];
         if (!arguments.length || (!remainder.length && nextKey === VALUE_KEY)) {
@@ -55,3 +97,5 @@ export default class MultiValueMap extends DynamicDefaultMap {
         }
     }
 }
+
+export default MultiValueMap;

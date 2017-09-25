@@ -5,7 +5,8 @@ Known Bugs
 ----
 - Different random parameters sent to the server for advertisements will return
 the same kitten picture. Looking at the code it seems to use modulo 16, so
-I will adjust the front-end to accommodate as an interim fix. 
+I will adjust the front-end to accommodate as an interim fix.
+- Maps in `handies/structs` do not fully match to the native ES6 Map API.
 
 Shortcuts Taken
 ----
@@ -17,6 +18,7 @@ Shortcuts Taken
   - Exceptions:
     - Created and added MultiValueMap and DynamicDefaultMultiValueMap
     - Created and added files in `dom` folder.
+    - Created `is-in-range.js`
   
 Tech Used
 ----
