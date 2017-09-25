@@ -12,7 +12,7 @@
 
 import DynamicDefaultMap from './dynamic_default';
 
-/** @type {Symbol} Key for storing actual values. */
+/** @type {!Symbol} Key for storing actual values. */
 const VALUE_KEY = Symbol('Key for values in MultiValueMap');
 
 class MultiValueMap extends DynamicDefaultMap {
@@ -56,7 +56,7 @@ class MultiValueMap extends DynamicDefaultMap {
      *
      * @param {...*} arguments Keys used to store a value, with the final value
      *     in the arguments being the value to be stored.
-     * @returns {Map} The inner map storing the final value.
+     * @returns {!Map<*, *>} The inner map storing the final value.
      */
     set() {
         const [nextKey, ...remainder] = [...arguments];

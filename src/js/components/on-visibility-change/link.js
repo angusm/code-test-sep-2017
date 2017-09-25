@@ -18,7 +18,7 @@ import fastdom from '../../../../node_modules/fastdom/fastdom'
  * @ngInject
  */
 function linkFn(scope, element, attrs) {
-    /** @type {function(boolean)} */
+    /** @type {!function(boolean)} */
     const onVisibilityChange = scope.$eval(attrs['onVisibilityChange']);
 
     /** @type {?boolean} */

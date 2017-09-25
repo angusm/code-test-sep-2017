@@ -25,14 +25,14 @@ import constants from '../../constants';
  */
 const cache = new DynamicDefaultMultiValueMap(getProductsForCache);
 
-/** @type {Object<string, string>} Parameter key constants. */
+/** @type {!Object<string, string>} Parameter key constants. */
 const ParamKeys = Object.freeze({
     LIMIT: 'limit',
     SKIP: 'skip',
     SORT: 'sort',
 });
 
-/** @const {stirng} The API endpoint for the products. */
+/** @const {string} The API endpoint for the products. */
 const API_ENDPOINT = '/api/products';
 
 /**

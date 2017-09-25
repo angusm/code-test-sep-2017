@@ -5,7 +5,7 @@ import ProductGroup from './product-group';
 import ProductsService from './service/service';
 import isDef from '../handies/functions/is_def';
 
-/** @type {Object<string, string>} Sort option constants. */
+/** @type {!Object<string, string>} Sort option constants. */
 const SortOption = Object.freeze({
     ID: 'ID',
     PRICE: 'Price',
@@ -21,7 +21,7 @@ const PRODUCTS_BETWEEN_ADS = 20;
 /** @const {!Array<string>} Display values for sort options. */
 const SORT_OPTIONS = Object.freeze(Object.values(SortOption));
 
-/** @type {Map<string, string>} Maps sort options to product fields. */
+/** @type {!Map<string, string>} Maps sort options to product fields. */
 const sortFieldsBySortOption = new Map([
     [SortOption.ID, 'id'],
     [SortOption.PRICE, 'price'],
