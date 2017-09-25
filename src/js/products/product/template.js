@@ -1,17 +1,18 @@
+/** @type {string} */
 const template = `
 <div class="product">
     <div class="product__face"
         ng-style="$ctrl.getProduct().getFaceStyle()"
         ng-bind="$ctrl.getProduct().getFace()"></div>
-    <div class="product__size">
+    <div>
         <span class="product__label">Size:</span>
         <span ng-bind="$ctrl.getProduct().getSize()"></span>
     </div>
-    <div class="product__price">
+    <div>
         <span class="product__label">Price:</span>
         <span ng-bind="$ctrl.getProduct().getDisplayPrice()"></span>
     </div>
-    <div class="product__date">
+    <div>
         <span class="product__label">Date:</span>
         <span ng-bind="$ctrl.getProduct().getDisplayDate()"></span>
     </div>

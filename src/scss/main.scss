@@ -9,23 +9,29 @@ advertisement {
 }
 
 product {
-  $product-size: 23%;
+  $products-per-row: 4;
+  $product-margin: 0.5%;
+  $product-size: (100% / $products-per-row) - ($product-margin * 2);
   box-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
   display: inline-block;
-  margin: 1%;
+  margin: $product-margin;
   padding: 0 0 $product-size;
   position: relative;
   width: $product-size;
 }
 
 .product {
+  $inner-margin: 10px;
+  bottom: $inner-margin;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  left: 0;
+  font-size: 14px;
+  height: calc(100% - (#{$inner-margin} * 2));
+  left: $inner-margin;
   position: absolute;
-  top: 0;
-  width: 100%;
+  right: $inner-margin;
+  top: $inner-margin;
+  width: calc(100% - (#{$inner-margin} * 2));
 }
 
 .product__face {
@@ -42,6 +48,3 @@ product {
 .product__id {
   font-size: 12px;
 }
-.product__size {}
-.product__price {}
-.product__date {}

@@ -76,8 +76,12 @@ class Product {
         return `$${this.getPriceInDollars()}`;
     }
 
+    getSize() {
+        return this.size_;
+    }
+
     getSizeInPx() {
-        return `${this.size_}px`;
+        return `${this.getSize()}px`;
     }
 }
 

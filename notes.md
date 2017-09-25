@@ -7,6 +7,7 @@ Known Bugs
 the same kitten picture. Looking at the code it seems to use modulo 16, so
 I will adjust the front-end to accommodate as an interim fix.
 - Maps in `handies/structs` do not fully match to the native ES6 Map API.
+- Not properly responsive.
 
 Shortcuts Taken
 ----
