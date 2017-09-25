@@ -81,7 +81,12 @@ consideration.
 
 Testing
 ----
-
+Unfortunately I did not have time this weekend to set up testing, but I did code
+with them in mind.
+- Minimizing the impact of Angular has minimized the number of tests that need
+to use Angular dependency injection and corresponding mocks.
+- Minimizing side effects would make testing more focused and reduce the amount
+of state that needs to be taken into account when testing.
 
 Best Practices
 ----
@@ -157,6 +162,11 @@ There's not always going to be time to research in the best way to do something
 and often I'll need to settle for something I know will work in the interim. In
 these cases I try to abstract away pieces I'm less confident in to a separate
 function so it can be more easily refactored or re-written later.
+### Cleanup
+I try to treat the first working version as a first draft of an essay. Taking a
+second pass through new code to document and clean things up for future devs
+(including myself) is something I try to do whenever the schedule/budget allows
+ for it. I usually wind up thankful I did.
 ### Misc Practices
 Making note of other best practices as I run across them
 - Leverage FastDOM for effects and interactions
@@ -166,6 +176,10 @@ Making note of other best practices as I run across them
 - Place blocking JS at the bottom of the page
 - Use `!!` to denote intentional boolean evaluation of non-boolean value
   - More or less a way of documenting intent
+- Remove error handling for cases of improper use.
+  - http://thecodelesscode.com/case/115
+- Use JSDocs to provide type information for documentation and prep for Closure
+Compiler integration if ever necessary for any part of the code.
 
 Action Items and Takeaways
 ----
